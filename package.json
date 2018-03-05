@@ -1,6 +1,6 @@
 {
   "name": "orange-peel",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Lightweight E2E test runner",
   "main": "dist/webdriver.js",
   "types": "dist/orange-peel.d.ts",
