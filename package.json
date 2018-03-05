@@ -3,6 +3,7 @@
   "version": "1.0.2",
   "description": "Lightweight E2E test runner",
   "main": "dist/webdriver.js",
+  "types": "dist/orange-peel.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "./node_modules/typescript/bin/tsc"
