@@ -6,8 +6,9 @@ import { Builder, WebDriver, until, WebElement, By } from 'selenium-webdriver';
 
 export enum BrowserType { CHROME = 1, FIREFOX }
 
-export class KhaleesiDriver {
+export class Browser {
 
+    // should be in config
     private firefoxProfilePath = process.env.FIREFOX_PROFILE_PATH;
     private firefoxBinaryPath = process.env.FIREFOX_BINARY_PATH;
     private seleniumAddress = process.env.SELENIUM_ADDRESS;
