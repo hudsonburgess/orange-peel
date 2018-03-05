@@ -2,9 +2,10 @@
   "name": "orange-peel",
   "version": "1.0.0",
   "description": "Lightweight E2E test runner",
-  "main": "index.js",
+  "main": "dist/webdriver.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "./node_modules/typescript/bin/tsc"
   },
   "keywords": [
     "E2E",
@@ -16,5 +17,12 @@
     "webdriver"
   ],
   "author": "BTI360",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^9.4.6",
+    "selenium-webdriver": "^4.0.0-alpha.1"
+  },
+  "devDependencies": {
+    "typescript": "^2.7.2"
+  }
 }
