@@ -6,7 +6,8 @@
   "types": "dist/orange-peel.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "./node_modules/typescript/bin/tsc"
+    "build": "./node_modules/typescript/bin/tsc",
+    "generate-types": "npm up orange-peel && dts-gen -m orange-peel -f dist/orange-peel.d.ts -o"
   },
   "keywords": [
     "E2E",
@@ -24,6 +25,8 @@
     "selenium-webdriver": "^4.0.0-alpha.1"
   },
   "devDependencies": {
+    "dts-gen": "^0.5.7",
+    "orange-peel": "^1.0.4",
     "typescript": "^2.7.2"
   }
 }
