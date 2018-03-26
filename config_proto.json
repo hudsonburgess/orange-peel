@@ -1,0 +1,51 @@
+browser_type: [
+    'chrome',
+    'firefox',
+    'ie'
+];
+
+debug_level: [
+    'error',
+    'warn',
+    'debug',
+    'info'
+];
+
+browser_configs [
+    firefox_config: {
+        profilePath: <path(string)>,
+        binaryPath: <path(string)>,
+        acceptUntrustedCerts: <boolean>,
+        assumeUntrustedCertIssuer: <boolean>,
+        defaultPersonalCert: <??>,
+        headless: <boolean>,
+        minimised: <boolean>,
+        resolution: <# in pixels, # in pixels>
+    },
+    chrome_config: {
+
+    },
+    ie_config: {
+
+    }
+]
+
+{
+    browsers: {
+        <custom_name>: {
+            browser: <browser_type(string)>,
+            config(browser_configs): {
+                config specific to browser type used
+                ...
+            },
+            instances: <# of desired instances>
+        }, <custom_name_2>: {
+            ... etc.
+        }
+    },
+    timeout: <# of msecs>,
+    baseLocalUrl: <base url for local app under test>,
+    baseRemoteUrl: <base url for deployed app under test>,
+    remoteSeleniumAddress: <url for selenium server>,
+    debugLevel: <debug_level(string)>
+}
