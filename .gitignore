@@ -1,2 +1,4 @@
 dist
 node_modules
+src/*.d.ts
+orange-config.json

@@ -7,7 +7,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "./node_modules/typescript/bin/tsc",
-    "generate-types": "npm up orange-peel && dts-gen -m orange-peel -f dist/orange-peel.d.ts -o"
+    "generate-types": "npm up orange-peel && dts-gen -m orange-peel -f dist/orange-peel.d.ts -o",
+    "setup": "node src/setup.js"
   },
   "keywords": [
     "E2E",

@@ -8,6 +8,8 @@ A demo of this package can be found [here](https://github.com/hudsonburgess/oran
 
 ## Setup
 
+`npm run setup` will generate a minimal default config file (does nothing at the moment...)
+
 ### Running locally
 
 For each browser you intend to test with, be sure to download the appropriate webdriver.
