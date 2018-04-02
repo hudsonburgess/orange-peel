@@ -3,8 +3,8 @@ import * as chrome from 'selenium-webdriver/chrome';
 import * as firefox from 'selenium-webdriver/firefox';
 import { Profile, Options, Driver } from 'selenium-webdriver/firefox';
 import { Builder, WebDriver, until, WebElement, By } from 'selenium-webdriver';
-
-export enum BrowserType { CHROME = 1, FIREFOX }
+import { default as configObj } from './config-parse';
+import { BrowserTypes } from './config-model';
 
 export class Browser {
 
@@ -16,11 +16,25 @@ export class Browser {
     private driver: WebDriver;
     private lastUrl: string;
 
-    constructor(browserType: BrowserType) {
-        if (browserType === BrowserType.CHROME) {
-            this.buildChromeDriver();
-        } else {
-            this.buildFirefoxDriver();
+    private browserConfig: any;
+
+    constructor(browserName: string) {
+        this.browserConfig = configObj.browsers[browserName];
+        switch (this.browserConfig.browser) {
+            case BrowserTypes.Chrome: {
+               this.buildChromeDriver();
+               break; 
+            } 
+            case BrowserTypes.Firefox: {
+               this.buildFirefoxDriver();
+               break; 
+            }
+            case BrowserTypes.IE: {
+                return;
+            }
+            default: {
+                return;
+            }
         }
     }
 
@@ -43,7 +57,7 @@ export class Browser {
         // console.log('Building remote chrome driver at', this.seleniumAddress)
         this.driver = new Builder()
             .forBrowser('chrome')
-            .usingServer(this.seleniumAddress)
+            .usingServer(configObj.remoteSeleniumAddress)
             .build();
     }
 
@@ -56,12 +70,12 @@ export class Browser {
     }
 
     private buildLocalFirefoxDriver(): void {
-        const profile = this.getFirefoxProfile();
-        const options = this.getFirefoxOptions(profile);
+        // const profile = this.getFirefoxProfile();
+        // const options = this.getFirefoxOptions(profile);
         // console.log('Building local firefox driver with profile at', this.firefoxProfilePath)
         this.driver = new Builder()
             .forBrowser('firefox')
-            .setFirefoxOptions(options)
+            // .setFirefoxOptions(options)
             .build();
     }
 
@@ -73,20 +87,20 @@ export class Browser {
             .build();
     }
 
-    private getFirefoxProfile(): Profile {
-        const profile = new firefox.Profile(this.firefoxProfilePath);
-        profile.setAcceptUntrustedCerts(true);
-        profile.setAssumeUntrustedCertIssuer(true);
-        profile.setPreference('security.default_personal_cert', 'Select Automatically');
-        return profile;
-    }
+    // private getFirefoxProfile(): Profile {
+    //     const profile = new firefox.Profile(this.firefoxProfilePath);
+    //     profile.setAcceptUntrustedCerts(true);
+    //     profile.setAssumeUntrustedCertIssuer(true);
+    //     profile.setPreference('security.default_personal_cert', 'Select Automatically');
+    //     return profile;
+    // }
 
-    private getFirefoxOptions(profile: Profile): Options {
-        const options = new firefox.Options();
-        options.setBinary(this.firefoxBinaryPath);
-        options.setProfile(profile);
-        return options;
-    }
+    // private getFirefoxOptions(profile: Profile): Options {
+    //     const options = new firefox.Options();
+    //     options.setBinary(this.firefoxBinaryPath);
+    //     options.setProfile(profile);
+    //     return options;
+    // }
 
     public getNativeDriver(): WebDriver {
         return this.driver;
@@ -103,7 +117,7 @@ export class Browser {
     public get(url: string): Promise<null> {
         return new Promise((resolve, reject) => {
             this.lastUrl = url;
-            this.driver.get(url)
+            this.driver.get(configObj.baseLocalUrl + url)
                 .then(() => resolve())
                 .catch((err: any) => reject(err));
         });

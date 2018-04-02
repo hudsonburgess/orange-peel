@@ -23,6 +23,7 @@
   "license": "ISC",
   "dependencies": {
     "@types/node": "^9.4.6",
+    "find-config": "^1.0.0",
     "selenium-webdriver": "^4.0.0-alpha.1"
   },
   "devDependencies": {
